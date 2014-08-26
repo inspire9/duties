@@ -1,14 +1,11 @@
 class Duties::Activity
   def self.call(record)
-    activity = new(record)
-    begin
-      activity.call
-      record.update_attributes status: 'success'
+    new(record).call
 
-      Duties::Next.call record.duty_record, record.position
-    rescue => error
-      record.update_attributes status: 'failure'
-    end
+    record.status = record.failures.any? ? 'failure' : 'success'
+    record.save!
+
+    Duties::Next.call record.duty_record, record.position
   end
 
   def initialize(activity)

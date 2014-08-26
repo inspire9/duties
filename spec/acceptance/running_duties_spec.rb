@@ -8,6 +8,13 @@ module Running
         enqueue_activity 'success_two', at: 2
       end
     end
+
+    class ExampleTwo < ::Duties::Duty
+      def enqueue_activities
+        enqueue_activity 'fail_one',    at: 1
+        enqueue_activity 'success_one', at: 2
+      end
+    end
   end
 
   module Activities
@@ -20,6 +27,12 @@ module Running
     class SuccessTwo < ::Duties::Activity
       def call
         #
+      end
+    end
+
+    class FailOne < ::Duties::Activity
+      def call
+        activity.failures << 'nope'
       end
     end
   end
@@ -37,5 +50,13 @@ describe 'Running duties' do
     duty = Duties::DutyRecord.find(id)
     expect(duty.activity_records.length).to eq(2)
     expect(duty.activity_records.pluck(:status)).to eq(['success', 'success'])
+  end
+
+  it 'stores errors' do
+    id     = Duties::Duty.enqueue 'example_two'
+    status = Duties::Status.new id
+
+    expect(status).to be_failure
+    expect(status.failures).to eq(['nope'])
   end
 end

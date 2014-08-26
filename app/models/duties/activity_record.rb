@@ -2,6 +2,7 @@ class Duties::ActivityRecord < ActiveRecord::Base
   self.table_name = 'duties_activity_records'
 
   belongs_to :duty_record, class_name: 'Duties::DutyRecord'
+  serialize :failures, JSON
 
   validates :name,        presence: true
   validates :duty_record, presence: true
