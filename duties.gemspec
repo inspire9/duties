@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = 'duties'
-  spec.version       = '0.0.1'
+  spec.version       = '0.0.2'
   spec.authors       = ['Pat Allan']
   spec.email         = ['pat@freelancing-gods.com']
   spec.summary       = %q{Run activities related to a duty in a specific order}
