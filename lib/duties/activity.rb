@@ -16,6 +16,6 @@ class Duties::Activity
 
   attr_reader :activity
 
-  delegate :duty, to: :activity
-  delegate :data, to: :duty
+  delegate :duty_record, to: :activity
+  delegate :data,        to: :duty_record
 end
