@@ -6,6 +6,7 @@ class Duties::Status
   def status
     return 'failure' if statuses.include?('failure')
     return 'pending' if statuses.include?('pending')
+    return 'pending' if record.activity_records.length.zero?
 
     'success'
   end
