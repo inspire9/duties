@@ -9,7 +9,7 @@ Duties are composed of one or more activities. These activities have positions, 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'duties', '0.0.2'
+gem 'duties', '0.0.3'
 ```
 
 ## Usage
